@@ -36,7 +36,7 @@ jobs:
     - name: Commit 
       run: | 
         git config --local user.email "action@github.com"
-        git config --locval user.name "Github Action"
+        git config --local user.name "Github Action"
         git commit -am "Bump docker version"
     
     - name: Push 
