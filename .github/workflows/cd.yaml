@@ -30,3 +30,14 @@ jobs:
       run: |
         cd K8s
         kustomize edit set image goserver=$DOCKER_USERNAME/gitopsfc:$GITHUB_SHA
+    - name: Commit 
+      run: | 
+        git config --local user.email "action@github.com"
+        git config --locval user.name "Github Action"
+        git commit -am "Bump docker version"
+    
+    - name: Push 
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{secrets.TOKEN_GITHUB}}
+        repository: pedrohedro/GitOps
