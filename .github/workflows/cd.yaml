@@ -20,16 +20,19 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ${{ secrets.DOCKER_USERNAME }}/gitopsfc
         tags: ${{ github.sha }}, latest
+  
     - name: Setup Kustomize 
       uses: imranismail/setup-kustomize@v1
       with:
         kustomie-version: "3.6.1"    
+   
     - name: Update Kubernetes resources
       env: 
         DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
       run: |
         cd K8s
         kustomize edit set image goserver=$DOCKER_USERNAME/gitopsfc:$GITHUB_SHA
+   
     - name: Commit 
       run: | 
         git config --local user.email "action@github.com"
@@ -39,5 +42,5 @@ jobs:
     - name: Push 
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{secrets.TOKEN_GITHUB}}
+        github_token: ${{secrets.GITHUB_TOKEN}}
         repository: pedrohedro/GitOps
