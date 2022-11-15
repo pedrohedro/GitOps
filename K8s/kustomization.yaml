@@ -7,5 +7,5 @@ resources:
 
 images:
 - name: goserver
-  newName: pedrohedro/gitopsfc
+  newName: pedrohedro/gitops-fc
   newTag: 076b4167987970317fd20340026520cbf920d30f
